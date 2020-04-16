@@ -150,27 +150,46 @@ const students = [
 //     }
 // }
 
-const createStudentComponent = (studentObject) => {
-     if (studentObject.score >= 60) {
-         return `<div class="student">
-             <h1 class="xx-large">${studentObject.name}</h1>
-             <section>${studentObject.subject}</section>
-             <aside>${studentObject.info}</aside>
-         </div>`
-     } else {
-         return `<div class="student">
-     <h1 class="xx-large failing">${studentObject.name}</h1>
-     <section class="bordered dashed section--padded">${studentObject.subject}</section>
-     <aside class="pushRight">${studentObject.info}</aside>
-    </div>`
-     }
-    }
-
-for (let i = 0; i < students.length; i++) {
-    let studentComponent = ""
-
-    studentComponent = createStudentComponent(students[i])
-
-    document.querySelector("#container").innerHTML += studentComponent;
+// // Challenge: Composition of Smaller Components
+const h1 = (text, headingClassName) =>
+{
+    let createHeading = document.createElement("h1");
+    let headingText = document.createTextNode(text);
+    createHeading.setAttribute("class", `xx-large ${headingClassName}`)
+    createHeading.appendChild(headingText);
+    document.body.appendChild(createHeading);
 }
-
+const section = (text) =>
+{
+    let createSection = document.createElement("section");
+    let sectionText = document.createTextNode(text);
+    createSection.setAttribute("class", "bordered dashed section--padded")
+    createSection.appendChild(sectionText);
+    document.body.appendChild(createSection);
+}
+const aside = (text) =>
+{
+    let createAside = document.createElement("aside");
+    let asideText = document.createTextNode(text);
+    createAside.setAttribute("class", "pushRight")
+    createAside.appendChild(asideText);
+    document.body.appendChild(createAside);
+}
+const createStudentComponent = (student, headingClassName) => {
+`
+    <div class="student">
+        ${h1(student.name, headingClassName)}
+        ${section(student.subject)}
+        ${aside(student.info)}
+    </div>
+`
+}
+for (student of students){
+    let studentComponent = ""
+    if (student.score >= 60){
+        studentComponent = createStudentComponent(student, "passing")
+    }
+    else{
+        studentComponent = createStudentComponent(student, "failing")
+    }
+}
