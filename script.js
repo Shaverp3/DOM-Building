@@ -116,15 +116,26 @@ const students = [
     }
 ]
 
-// const createStudentComponent = (name, subject, info) => {
-//     return `
-//     <div class="student">
-//     <h1 class="xx-large passing">Student Name</h1>
-//     <section class="bordered dashed section--padded">Subject</section>
-//     <aside class="pushRight">Additional information</aside>
-// </div>`
-// }
+ const createStudentComponent = (name, subject, info, headingClassName) => {
+     return `
+     <div class="student">
+     <h1 class="xx-large ${headingClassName}">${name}</h1>
+     <section class="bordered dashed section--padded">${subject}</section>
+     <aside class="pushRight">${info}</aside>
+ </div>`
+ }
 
+for (let i = 0; i < students.length; i++){
+    let studentComponent =""
+    if (students[i].score >= 60){
+        studentComponent = createStudentComponent(students[i].name,students[i].subject,students[i].info, "passing")
+    } else {
+        studentComponent = createStudentComponent(students[i].name,students[i].subject,students[i].info, "failing")
+
+    }
+    document.querySelector("#container").innerHTML += studentComponent   
+
+}
 
 // If a student is passing, then the structure should look like the following.
 
@@ -151,45 +162,88 @@ const students = [
 // }
 
 // // Challenge: Composition of Smaller Components
-const h1 = (text, headingClassName) =>
-{
-    let createHeading = document.createElement("h1");
-    let headingText = document.createTextNode(text);
-    createHeading.setAttribute("class", `xx-large ${headingClassName}`)
-    createHeading.appendChild(headingText);
-    document.body.appendChild(createHeading);
-}
-const section = (text) =>
-{
-    let createSection = document.createElement("section");
-    let sectionText = document.createTextNode(text);
-    createSection.setAttribute("class", "bordered dashed section--padded")
-    createSection.appendChild(sectionText);
-    document.body.appendChild(createSection);
-}
-const aside = (text) =>
-{
-    let createAside = document.createElement("aside");
-    let asideText = document.createTextNode(text);
-    createAside.setAttribute("class", "pushRight")
-    createAside.appendChild(asideText);
-    document.body.appendChild(createAside);
-}
-const createStudentComponent = (student, headingClassName) => {
-`
-    <div class="student">
-        ${h1(student.name, headingClassName)}
-        ${section(student.subject)}
-        ${aside(student.info)}
-    </div>
-`
-}
-for (student of students){
-    let studentComponent = ""
-    if (student.score >= 60){
-        studentComponent = createStudentComponent(student, "passing")
-    }
-    else{
-        studentComponent = createStudentComponent(student, "failing")
-    }
-}
+// const h1 = (text, headingClassName) =>
+// {
+//     let createHeading = document.createElement("h1");
+//     let headingText = document.createTextNode(text);
+//     createHeading.setAttribute("class", `xx-large ${headingClassName}`)
+//     createHeading.appendChild(headingText);
+//     document.body.appendChild(createHeading);
+// }
+// const section = (text) =>
+// {
+//     let createSection = document.createElement("section");
+//     let sectionText = document.createTextNode(text);
+//     createSection.setAttribute("class", "bordered dashed section--padded")
+//     createSection.appendChild(sectionText);
+//     document.body.appendChild(createSection);
+// }
+// const aside = (text) =>
+// {
+//     let createAside = document.createElement("aside");
+//     let asideText = document.createTextNode(text);
+//     createAside.setAttribute("class", "pushRight")
+//     createAside.appendChild(asideText);
+//     document.body.appendChild(createAside);
+// }
+// const createStudentComponent = (student, headingClassName) => {
+// `
+//     <div class="student">
+//         ${h1(student.name, headingClassName)}
+//         ${section(student.subject)}
+//         ${aside(student.info)}
+//     </div>
+// `
+// }
+// for (student of students){
+//     let studentComponent = ""
+//     if (student.score >= 60){
+//         studentComponent = createStudentComponent(student, "passing")
+//     }
+//     else{
+//         studentComponent = createStudentComponent(student, "failing")
+//     }
+// }
+
+
+// Create an unordered list element
+// const list = document.createElement('ul')
+
+// // Create a list item for our list
+// const listItem = document.createElement('li')
+// listItem.className = "president"
+// listItem.textContent = "George Bush"
+
+// // Put the list item on the unordered list
+// list.appendChild(listItem)
+
+// console.log(list)
+
+// const getArtical = document.querySelector("#messages")
+//  console.log(getArtical)
+
+//  Create five (5) section components, each with a class of message, and with the content of your choosing.
+
+// const createSection = document.createElement('section')
+
+
+//  Using appendChild(), attach each message as a child to the messages element.
+//  Example output.
+ 
+//  <article id="messages">
+//      <section class="message">
+//          Are we doing fireworks this year?
+//      </section>
+//      <section class="message">
+//          After last year's "tree incident", should we?
+//      </section>
+//      <section class="message">
+//          The fire fighters put it out in like a minute. Wasn't even a real fire.
+//      </section>
+//      <section class="message">
+//          We can set them off in the street.
+//      </section>
+//      <section class="message">
+//          Our neighbors' houses are flammable, too
+//      </section>
+//  </article>
