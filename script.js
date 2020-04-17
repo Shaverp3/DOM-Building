@@ -115,27 +115,27 @@ const students = [
         score: 95
     }
 ]
+// Practice: Student Components
+//  const createStudentComponent = (name, subject, info, headingClassName) => {
+//      return `
+//      <div class="student">
+//      <h1 class="xx-large ${headingClassName}">${name}</h1>
+//      <section class="bordered dashed section--padded">${subject}</section>
+//      <aside class="pushRight">${info}</aside>
+//  </div>`
+//  }
 
- const createStudentComponent = (name, subject, info, headingClassName) => {
-     return `
-     <div class="student">
-     <h1 class="xx-large ${headingClassName}">${name}</h1>
-     <section class="bordered dashed section--padded">${subject}</section>
-     <aside class="pushRight">${info}</aside>
- </div>`
- }
+// for (let i = 0; i < students.length; i++){
+//     let studentComponent =""
+//     if (students[i].score >= 60){
+//         studentComponent = createStudentComponent(students[i].name,students[i].subject,students[i].info, "passing")
+//     } else {
+//         studentComponent = createStudentComponent(students[i].name,students[i].subject,students[i].info, "failing")
 
-for (let i = 0; i < students.length; i++){
-    let studentComponent =""
-    if (students[i].score >= 60){
-        studentComponent = createStudentComponent(students[i].name,students[i].subject,students[i].info, "passing")
-    } else {
-        studentComponent = createStudentComponent(students[i].name,students[i].subject,students[i].info, "failing")
+//     }
+//     document.querySelector("#container").innerHTML += studentComponent   
 
-    }
-    document.querySelector("#container").innerHTML += studentComponent   
-
-}
+// }
 
 // If a student is passing, then the structure should look like the following.
 
@@ -205,6 +205,34 @@ for (let i = 0; i < students.length; i++){
 //     }
 // }
 
+// Challenge: Generic HTML Function -- did this one myself!!
+// const element = (type, content, classtext) => {
+//     let createType = document.createElement(type);
+//     let createContent = document.createTextNode(content);
+//     createType.appendChild(createContent)
+//     createType.setAttribute("class", classtext)
+//     document.body.appendChild(createType)
+// }
+
+// const createStudentComponent = (student, headingClassName) => {
+//     `
+//     <div id="student">
+//         ${element("h1", student.name, `xx-large ${headingClassName}`)}
+//         ${element("section", student.subject, "bordered dashed section--padded")}
+//         ${element("aside", student.info, "pushRight")}
+//     </div>`
+// }
+
+// for (student of students) {
+//     let studentComponent = ""
+//     if (student.score >= 60) {
+//         studentComponent = createStudentComponent(student, "passing")
+//     } else {
+//         studentComponent = createStudentComponent(student, "failing")
+
+//     }
+// }
+
 
 // Create an unordered list element
 // const list = document.createElement('ul')
@@ -224,12 +252,38 @@ for (let i = 0; i < students.length; i++){
 
 //  Create five (5) section components, each with a class of message, and with the content of your choosing.
 
-// const createSection = document.createElement('section')
+//Advanced Challenge: DOM Fragments 
+//A new "virtual" document fragment to contain components
+const fragment = document.createDocumentFragment()
+//create a message component element
+const fireworksMsg = document.createElement('section')
+fireworksMsg.textContent = "Are we doing fireworks this year?"
+fragment.appendChild(fireworksMsg)
+
+const treeMsg = document.createElement('section')
+treeMsg.textContent = "After last year's tree incident, should we?"
+fragment.appendChild(treeMsg)
+
+const fireMsg = document.createElement('section')
+fireMsg.textContent = "The fire fighters put it out in like a minute. Wasn't even a real fire. "
+fragment.appendChild(fireMsg)
+
+const setOffMsg = document.createElement('section')
+setOffMsg.textContent = "We can set them off in the street."
+fragment.appendChild(setOffMsg)
+
+const neighborsMsg = document.createElement('section')
+neighborsMsg.textContent = "Our neighbors' houses are flammable, too"
+fragment.appendChild(neighborsMsg)
+
+
+document.querySelector("#messages").appendChild(fragment)
+
 
 
 //  Using appendChild(), attach each message as a child to the messages element.
 //  Example output.
- 
+
 //  <article id="messages">
 //      <section class="message">
 //          Are we doing fireworks this year?
